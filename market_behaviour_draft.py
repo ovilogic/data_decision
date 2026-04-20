@@ -104,3 +104,4 @@ print("All drawdowns:", dd)
 # Because you subtract the roll_max from returns, you get negative values. The minimum of those negative values is the maximum drawdown.
 dd = dd.min()
 print("Maximum drawdown:", dd)
+print("Maximum drawdown using function:", max_drawdown(returns))
