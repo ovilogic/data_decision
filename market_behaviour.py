@@ -25,7 +25,7 @@ data = data["Adj Close"].dropna()
 # print(data.iloc[0, 2])
 
 # Let's reduce the size of the data to make it easier to understand the operations on it.
-data = data.iloc[0:4, 0:2]
+data = data.iloc[0:5, 0:2]
 # print(data)
 
 
@@ -35,7 +35,7 @@ returns = data.pct_change().dropna()
 
 # Average returns
 avg_returns = returns.mean()
-print(avg_returns)
+# print(avg_returns)
 man_avg = []
 for i in returns.columns:
     # manual = round(returns[i].mean(), 6)
@@ -83,12 +83,24 @@ volatility = returns.std()
 
 # Rolling average of returns
 roll = returns.rolling(window=2).mean()
-print(roll)
+# print(roll)
 ## Manual rolling average of returns
 rolling_avg = []
 roll_1 = returns.iloc[0, 0]
 roll_2 = returns.iloc[1, 0]
 rolling_avg.append((roll_1 + roll_2) / 2)
-print("Rolling average: ", rolling_avg)
+# print("Rolling average: ", rolling_avg)
 roll_3 = returns.iloc[2, 0]
-print("Rolling average: ", round((roll_2 + roll_3) / 2, 6))
+# print("Rolling average: ", round((roll_2 + roll_3) / 2, 6))
+
+def max_drawdown(price_df):
+    roll_max = price_df.cummax()
+    drawdown = (price_df - roll_max) / roll_max
+    return drawdown.min()
+
+roll_max = returns.cummax()
+dd = (returns - roll_max)/roll_max
+print("All drawdowns:", dd)
+# Because you subtract the roll_max from returns, you get negative values. The minimum of those negative values is the maximum drawdown.
+dd = dd.min()
+print("Maximum drawdown:", dd)
