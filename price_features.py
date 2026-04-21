@@ -15,9 +15,14 @@ TICKERS = [
     "HD", "PG", "DIS", "BAC", "XOM",
     "KO", "PEP", "INTC", "CSCO", "ORCL"
 ]
-# data = yf.download(tickers=TICKERS, start="2023-01-01", end=None, auto_adjust=False)
-data = pd.read_pickle("data.pkl")
-data = data["Adj Close"].dropna()
+
+# Clean data downloader function
+def download_data(tickers, start="2023-01-01", end=None):
+    data = yf.download(tickers=tickers, start=start, end=end, auto_adjust=False)
+    data = data["Adj Close"].dropna()
+    if isinstance(data, pd.Series):
+        data = data.to_frame()
+    return data
 
 # First feature: returns.
 def compute_returns(ticker_prices):
@@ -46,19 +51,12 @@ def build_features_df(price_df):
     returns = compute_returns(price_df)
     avg_returns = compute_average_returns(returns)
     volatility = compute_volatility(returns)
-    # rolling_avg = compute_rolling_average(returns)
     max_drawdown = compute_max_drawdown(price_df)
     
     features = pd.DataFrame({
         "average_returns": avg_returns,
         "volatility": volatility,
-        
         "max_drawdown": max_drawdown
     })
     
     return features
-
-
-features = build_features_df(data)
-print(features)
-print(features.shape)
