@@ -8,6 +8,25 @@ import math
 
 
 # apple = yfinance.Ticker('AAPL')
+SECTORS = {
+    "1": {
+        "name": "Tech",
+        "tickers": [
+            "AAPL", "MSFT", "GOOGL", "AMZN", "META",
+            "TSLA", "NVDA", "JPM", "V", "UNH",
+            "HD", "PG", "DIS", "BAC", "XOM",
+            "KO", "PEP", "INTC", "CSCO", "ORCL"
+            ]
+            },
+    "2": {
+        "name": "Defence",
+        "tickers": ["LMT", "RTX", "NOC", "BA"]
+    },
+    "3": {
+        "name": "Energy",
+        "tickers": ["XOM", "CVX", "BP", "SHEL"]
+    }
+}
 
 TICKERS = [
     "AAPL", "MSFT", "GOOGL", "AMZN", "META",
