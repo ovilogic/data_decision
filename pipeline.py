@@ -41,6 +41,9 @@ def run_pipeline():
     cluster_labels = clustered_df["cluster"]
     rolling_avg_transposed = rolling_avg.T
     rolling_avg_clustered = rolling_avg_transposed.groupby(cluster_labels).mean()
+    rolling_avg_clustered = rolling_avg_clustered.round(6)  # Round the rolling average values to 6 decimal places
+    rolling_avg_clustered.columns = rolling_avg_clustered.columns.astype(str)
+    rolling_avg_clustered = rolling_avg_clustered.T
     
     # Export to csv
     # clustered_df.to_csv("clustered_stocks.csv", index=True)
