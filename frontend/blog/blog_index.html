@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>technOvi</title>
+	<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet"> <!-- https://fontawesome.com/ -->
+	<link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro&display=swap" rel="stylesheet"> <!-- https://fonts.google.com/ -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="../css/blogStyle.css" rel="stylesheet">
+
+</head>
+<body>
+    <!-- Navigation panels common to all blog pages. Start. -->
+    <div class="topbar">
+        <img src="./img/logo1.png" class="logo">
+        <!-- The navbar right of logo: -->
+        <div class="topnav">
+          <a class="active" href="../index.html">Home</a>
+          <a href="./blog_index.html">Blog</a>
+          <a href="../finance_tool/fin_index.html">Finance Tool</a>
+          <a class="nav-link" href="../market_clusters/market_index.html">Market Clusters</a>
+          <select id="about" >
+              <option value="about me">about me</option>
+              <option value="../index.html#section-3">Who</option>
+              <option value="../index.html#section-2">Ethos</option>
+          </select>
+          <a href="./contact.html">
+          <button type='button' class="contact">contact me</button></a>
+        </div>
+      </div>
+	<header class="tm-header" id="tm-header">
+        <div class="tm-header-wrapper">
+            <button class="navbar-toggler" type="button" aria-label="Toggle navigation">
+                <i class="fas fa-bars"></i>
+            </button>
+            <div class="tm-site-header">
+                <div class="mb-3 mx-auto tm-site-logo"><img src="./img/logo1.png" class="logo"></div>            
+                <h1 class="text-center">Ovi's blog</h1>
+            </div>
+            <nav class="tm-nav" id="tm-nav">            
+                <ul>
+                    <li class="tm-nav-item active"><a href="./blog_index.html" class="tm-nav-link">
+                        <i class="fas fa-home"></i>
+                        Blog Home
+                    </a></li>
+                    <li class="tm-nav-item"><a href="post.html" class="tm-nav-link">
+                        <i class="fas fa-book"></i>
+                        Read 
+                    </a></li>
+                    <li class="tm-nav-item"><a href="about.html" class="tm-nav-link">
+                        <i class="fa-solid fa-circle-info"></i>
+                        About blog
+                    </a></li>
+                    <li class="tm-nav-item"><a href="contact.html" class="tm-nav-link">
+                        <i class="far fa-comments"></i>
+                        Contact me
+                    </a></li>
+                </ul>
+            </nav>
+            <div class="tm-mb-65">
+        
+                <a href="https://www.linkedin.com/in/ovi-o-855296289/" class="tm-social-link">
+                    <i class="fab fa-linkedin tm-social-icon"></i>
+                </a>
+            </div>
+            <p class="tm-mb-80 pr-5 text-white">
+                The Life and Opinions of a Self-Taught Developer.
+            </p>
+        </div>
+    </header>
+    <!-- Navigation panels common to all blog pages. End. -->
+    <div class="container-fluid">
+        <main class="tm-main">
+            <!-- Search form -->
+            <!-- <div class="row tm-row">
+                <div class="col-12">
+                    <form method="GET" class="form-inline tm-mb-80 tm-search-form">                
+                        <input class="form-control tm-search-input" name="query" type="text" placeholder="Search..." aria-label="Search">
+                        <button class="tm-search-button" type="submit">
+                            <i class="fas fa-search tm-search-icon" aria-hidden="true"></i>
+                        </button>                                
+                    </form>
+                </div>                
+            </div> -->
+            <!-- Proper Blog posts section, 2 at a time side by side.  -->
+            <div id="articles-space" class="row">
+                <!-- Posts begin here. -->
+                <!-- Keeping this mock post for the classes of each element and structure of elemetns-->
+                <!-- 
+                <article class="col-12 col-md-6 tm-post">
+                    <hr class="tm-hr-primary">
+                    <a href="post.html" class="effect-lily tm-post-link tm-pt-20">
+                        <div class="tm-post-link-inner">
+                            <img src="img/generic23.jpg" alt="Image" class="img-fluid">
+                        </div>
+                        <h2 class="tm-pt-30 tm-color-primary tm-post-title">Title !!! varius risus</h2>
+                    </a>                    
+                    <p class="tm-pt-30">
+                        Quisque id ipsum vel sem maximus vulputate sed quis velit. Nunc vel turpis eget orci elementum cursus vitae in eros. Quisque vulputate nulla ut dolor consectetur luctus.
+                    </p>
+                    <div class="d-flex justify-content-between tm-pt-45">
+                        <span class="tm-color-primary">Visual . Artworks</span>
+                        <span class="tm-color-primary">June 16, 2020</span>
+                    </div>
+                    <hr>
+                    <div class="d-flex justify-content-between">
+                        <span>96 comments</span>
+                        <span>by Admin Sam</span>
+                    </div>
+                </article> -->
+            </div>
+            <!-- End of articles space. -->
+
+            <!-- Pagination. Start -->
+            <div class="row tm-row tm-mt-100 tm-mb-75">
+                <!-- Prev and Next buttons on the left -->
+                <div class="tm-prev-next-wrapper">
+                    <button id="prev-btn" class="mb-2 tm-btn tm-btn-primary tm-prev-next tm-mr-20">Prev</button>
+                    <button id="next-btn" class="mb-2 tm-btn tm-btn-primary tm-prev-next">Next</button>
+                </div>
+                <!-- Page numbers buttons. -->
+                <div class="tm-paging-wrapper">
+                    <span class="d-inline-block mr-3">Page</span>
+                    <nav class="tm-paging-nav d-inline-block">
+                        <ul>
+                            <!-- <li class="tm-paging-item active">
+                                <a href="#" class="mb-2 tm-btn tm-paging-link">1</a>
+                            </li>
+                            <li class="tm-paging-item">
+                                <a href="#" class="mb-2 tm-btn tm-paging-link">2</a>
+                            </li>
+                            <li class="tm-paging-item">
+                                <a href="#" class="mb-2 tm-btn tm-paging-link">3</a>
+                            </li>
+                            <li class="tm-paging-item">
+                                <a href="#" class="mb-2 tm-btn tm-paging-link">4</a>
+                            </li> -->
+                        </ul>
+                    </nav>
+                </div>                
+            </div>
+            <!-- End of Pagination  -->
+            <footer class="row tm-row">
+                <hr class="col-12">
+                <div class="col-md-6 col-12 tm-color-gray">
+                    <p></p>Design: <a rel="nofollow" target="_parent" href="https://templatemo.com" class="tm-external-link">TemplateMo</a>
+                    & Ovi</p>
+                </div>
+                <div class="col-md-6 col-12 tm-color-gray tm-copyright">
+                    
+                </div>
+            </footer>
+        </main>
+    </div>
+    <script src="js/jquery.min.js"></script>
+    <script src="js/templatemo-script.js"></script>
+    <script src="js/add_posts.js"></script>
+    <!-- <script src="js/pagination.js"></script> -->
+    <script>
+        document.getElementById('about').addEventListener('change', function() {
+            var url = this.value; // get selected value
+            if (url) { // require a URL
+                window.location = url; // redirect
+            }
+        });
+    </script>
+ 
+</body>
+</html>

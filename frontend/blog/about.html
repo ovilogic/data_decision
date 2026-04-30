@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>technOvi</title>
+	<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet"> <!-- https://fontawesome.com/ -->
+	<link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro&display=swap" rel="stylesheet"> <!-- https://fonts.google.com/ -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/blogStyle.css" rel="stylesheet">
+
+</head>
+<body>
+	<!-- Navigation panels common to all blog pages. Start. -->
+    <div class="topbar">
+        <img src="./img/logo1.png" class="logo">
+        <!-- The navbar right of logo: -->
+        <div class="topnav">
+          <a class="active" href="../index.html">Home</a>
+          <a href="./blog_index.html">Blog</a>
+          <a href="../finance_tool/fin_index.html">Finance Tool</a>
+       
+          <select id="about" >
+            <option value="about me">about me</option>
+            <option value="../index.html#section-3">Who</option>
+            <option value="../index.html#section-2">Ethos</option>
+        </select>
+        <a href="./contact.html">
+        <button type='button' class="contact">contact me</button></a>
+        </div>
+      </div>
+	<header class="tm-header" id="tm-header">
+        <div class="tm-header-wrapper">
+            <button class="navbar-toggler" type="button" aria-label="Toggle navigation">
+                <i class="fas fa-bars"></i>
+            </button>
+            <div class="tm-site-header">
+                <div class="mb-3 mx-auto tm-site-logo"><img src="./img/logo1.png" class="logo"></div>            
+                <h1 class="text-center">Ovi's blog</h1>
+            </div>
+            <nav class="tm-nav" id="tm-nav">            
+                <ul>
+                    <li class="tm-nav-item"><a href="./blog_index.html" class="tm-nav-link">
+                        <i class="fas fa-home"></i>
+                        Blog Home
+                    </a></li>
+                    <li class="tm-nav-item"><a href="post.html" class="tm-nav-link">
+                        <i class="fas fa-book"></i>
+                        Read 
+                    </a></li>
+                    <li class="tm-nav-item active"><a href="about.html" class="tm-nav-link">
+                        <i class="fa-solid fa-circle-info"></i>
+                        About blog
+                    </a></li>
+                    <li class="tm-nav-item"><a href="contact.html" class="tm-nav-link">
+                        <i class="far fa-comments"></i>
+                        Contact me
+                    </a></li>
+                </ul>
+            </nav>
+            <div class="tm-mb-65">
+        
+                <a href="https://www.linkedin.com/in/ovi-o-855296289/" class="tm-social-link">
+                    <i class="fab fa-linkedin tm-social-icon"></i>
+                </a>
+            </div>
+            <p class="tm-mb-80 pr-5 text-white">
+                The Life and Opinions of a Self-Taught Developer.
+            </p>
+        </div>
+    </header>
+    <!-- Navigation panels common to all blog pages. End. -->
+    
+    <div class="container-fluid">
+        <main class="tm-main">
+            <!-- Search form -->
+            <!-- <div class="row tm-row">
+                <div class="col-12">
+                    <form method="GET" class="form-inline tm-mb-80 tm-search-form">                
+                        <input class="form-control tm-search-input" name="query" type="text" placeholder="Search..." aria-label="Search">
+                        <button class="tm-search-button" type="submit">
+                            <i class="fas fa-search tm-search-icon" aria-hidden="true"></i>
+                        </button>                                
+                    </form>
+                </div>                
+            </div>             -->
+            <div class="row tm-row tm-mb-45">
+                <div class="col-12">
+                    <hr class="tm-hr-primary tm-mb-55">
+                    <img src="img/davidDroid.png" alt="Image" class="img-fluid">
+                </div>
+            </div>
+            <div class="row tm-row tm-mb-40">
+                <div class="col-12">                    
+                    <div class="mb-4">
+                        <h2 class="pt-2 tm-mb-40 tm-color-primary tm-post-title">About this blog</h2>
+                        <p>
+                            The purpose of a blog is often to document a project. Or to deliver some useful information to the community. This is none of those things. What drove me to put the idea into
+                            practice, the catalyst, was that I would derive some use from it.
+                        </p>
+                        <p>
+                            I sometimes catch myself exclaiming something out loud while deeply immersed in code. Sometimes when I am stuck, sometimes when there is a breakthrough, but usually when 
+                            I am totally absorbed and forget about myself.
+                        </p>
+                        <p>
+                           This is an outlet for that particular psychological need that activates my voice even though there's no one meant to hear me. Obviously, those exclamations have little
+                           value in their raw form, other that informing me that 'there is a need to put my coding exertions into words'. Will it help me develop my skills? Develop
+                           professionally, personally even, lead to any type of growth? I am not sure. But if there is a need, there could be some benefit in at least clearing my mind and 
+                           moving on.
+                        </p>
+                        <p>
+                            So here it is. Sharing a few reflections on what it's like to teach yourself coding mid-life.
+                        </p>                            
+                    </div>                    
+                </div>
+            </div>
+                 
+            <div class="row tm-row tm-mb-60">
+                <div class="col-12">
+                    <hr class="tm-hr-primary  tm-mb-55">
+                </div>                
+                
+                <div class="col-lg-6 tm-mb-60 tm-person-col">
+                    <div class="media tm-person">
+                        <!-- <img src="img/profilePhoto.png" alt="Image" class="img-fluid mr-4"> -->
+                        <div class="media-body">
+                            <h2 class="tm-color-primary tm-post-title mb-2">Ovi Oprea</h2>
+                            <!-- <h3 class="tm-h3 mb-3">aspiring developer</h3> -->
+                            <!-- <p class="mb-0 tm-line-height-short">
+                                I am someone with a degree in literature and longtime interest in humanities, who changed course mid-life to find something more practical and financially rewarding.
+                                And who developed a strange new taste for building stuff with code. 
+                            </p> -->
+                        </div>
+                    </div>
+                </div>
+                
+                
+            </div>        
+            <footer class="row tm-row">
+                <hr class="col-12">
+                <div class="col-md-6 col-12 tm-color-gray">
+                    <p></p>Design: <a rel="nofollow" target="_parent" href="https://templatemo.com" class="tm-external-link">TemplateMo</a>
+                    & Ovi</p>
+                </div>
+                <div class="col-md-6 col-12 tm-color-gray tm-copyright">
+                    
+                </div>
+            </footer>
+        </main>
+    </div>
+    <script src="js/jquery.min.js"></script>
+    <script src="js/templatemo-script.js"></script>
+    <script>
+        document.getElementById('about').addEventListener('change', function() {
+            var url = this.value; // get selected value
+            if (url) { // require a URL
+                window.location = url; // redirect
+            }
+        });
+    </script>
+</body>
+</html>

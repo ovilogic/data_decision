@@ -1,4 +1,9 @@
+<<<<<<< HEAD
 .venv/
 __pycache__/
 *.pyc
 
+=======
+backend/__pycache__/
+**/.venv/_
+>>>>>>> 3e8cce2 (Full stack for the Market Clusters new page added to the website.)

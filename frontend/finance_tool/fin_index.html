@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Stock Viewer</title>
+  <script src="https://cdn.plot.ly/plotly-3.0.1.min.js"></script>
+  <!-- Bootstrap 5 CDN -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro&display=swap" rel="stylesheet"> <!-- https://fonts.google.com/ -->
+  <link href="css/bootstrap.min.css" rel="stylesheet">
+  <link href="../css/blogStyle.css" rel="stylesheet">
+</head>
+
+<body class="bg-light">
+
+  <!-- Navigation panels common to all blog pages. Start. -->
+  <div class="topbar">
+    <img src="./img/logo1.png" class="logo">
+    <!-- The navbar right of logo: -->
+    <div class="topnav">
+      <a class="active" href="../index.html">Home</a>
+      <a href="../blog/blog_index.html">Blog</a>
+      <a class="nav-link" href="../market_clusters/market_index.html">Market Clusters</a>
+      <a href="../index.html#section-4">
+      <button type='button' class="contact">contact me</button></a>
+    </div>
+  </div>
+<!-- Navigation panels common to all blog pages. End. -->
+
+  <div class="container py-5">
+    <!-- Heading -->
+    <h1 class="text-center mb-4" style="color: navy;">Stock Price Viewer</h1>
+
+    <!-- Flex container -->
+    <div class="d-flex flex-column flex-lg-row gap-4 align-items-start">
+      <!-- Form -->
+      <form id="stock-form" class="bg-white p-4 rounded shadow-sm flex-fill" style="max-width: 500px; min-width: 300px;">
+        <div class="mb-3">
+          <label for="ticker" class="form-label">Stock Ticker</label>
+          <input type="text" name="ticker" id="ticker" class="form-control" placeholder="e.g. AAPL" required>
+        </div>
+
+        <div class="mb-3">
+          <label for="start" class="form-label">Start Date</label>
+          <input type="date" name="start" id="start" class="form-control" required>
+        </div>
+
+        <div class="mb-3">
+          <label for="end" class="form-label">End Date</label>
+          <input type="date" name="end" id="end" class="form-control" required>
+        </div>
+
+        <div class="mb-3">
+          <label for="rolling-window" class="form-label">Rolling Average Window (2-220)</label>
+          <input type="number" name="rolling-window" id="rolling-window" class="form-control" min="2" max="220" placeholder="e.g. 20" required>
+        </div>
+
+        <button type="submit" class="btn btn-primary w-100">Submit</button>
+      </form>
+
+      <!-- Chart section -->
+      <h4 id="chart-title" class="text-center mb-3"></h4>
+      <div class="bg-white p-3 rounded shadow-sm flex-fill w-100" style="min-height: 300px;"
+       id="chart">
+        <!-- Plot will render here -->
+      </div>
+    </div>
+  </div>
+
+  <script src="./js/chart.js"></script>
+</body>
+
+</html>

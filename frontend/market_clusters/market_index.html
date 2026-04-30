@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>Market Clusters Intelligence</title>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- Bootstrap (layout only) -->
+  <link href="../css/bootstrap.min.css" rel="stylesheet">
+
+  <!-- Shared font -->
+  <link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro&display=swap" rel="stylesheet">
+
+  <!-- Your global UI styling -->
+  <link href="../css/blogStyle.css" rel="stylesheet">
+
+  <!-- Market-specific CSS (NEW) -->
+  <link href="./css/market.css" rel="stylesheet">
+
+  <!-- JavaScript -->
+   <script src="./js/runAnalysis.js"></script>
+
+  <!-- Plotly -->
+  <script src="https://cdn.plot.ly/plotly-3.0.1.min.js"></script>
+  <!-- <script src="https://cdn.plot.ly/plotly-latest.min.js"></script> -->
+</head>
+
+<body>
+
+<!-- NAV (same system as Finance Tool) -->
+<div class="topbar">
+  <img src="./img/logo1.png" class="logo">
+
+  <div class="topnav">
+    <a href="../index.html">Home</a>
+    <a href="../blog/blog_index.html">Blog</a>
+    <a href="../finance_tool/fin_index.html">Finance Tool</a>
+    <a href="../index.html#section-4">
+      <button class="contact">contact me</button>
+    </a>
+  </div>
+</div>
+
+<!-- PAGE -->
+<div class="container market-container">
+
+  <!-- TITLE -->
+  <h2 class="market-title">
+    Market Clusters Intelligence
+  </h2>
+
+  <!-- MAIN GRID -->
+  <div class="row">
+
+    <!-- INPUT PANEL -->
+    <div class="col-lg-4">
+
+      <div class="market-panel">
+
+        <div class="market-control-group">
+          <label class="market-label">Dataset</label>
+          <select id="dataset" class="form-select market-select">
+            <option value="1">Technology (Growth / Innovation)</option>
+            <option value="2">Defence & Aerospace (Geopolitical)</option>
+            <option value="3">Energy (Macro / Cyclical)</option>
+          </select>
+        </div>
+
+        <div class="market-control-group">
+          <label class="market-label">End Date</label>
+          <input type="date" id="year" class="market-date" />
+        </div>
+
+        <button class="market-btn" onclick="runAnalysis()">
+          Run Analysis
+        </button>
+
+      </div>
+      <div class="market-label-guide">
+        <h6>Cluster Labels Guide</h6>
+        <ul>
+          <li><strong>Efficient</strong> — Best risk-adjusted performance (high return relative to risk)</li>
+          <li><strong>Growth</strong> — Highest raw returns (can include higher volatility)</li>
+          <li><strong>Defensive</strong> — Low volatility and more stable price behavior</li>
+          <li><strong>Crash Risk</strong> — Large drawdowns, sensitive to downturns</li>
+          <li><strong>Balanced</strong> — No dominant characteristic across metrics</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- CLUSTER OUTPUT -->
+    <div class="col-lg-8">
+      <div class="market-card">
+        <h5>Cluster Overview</h5>
+        <div id="clusterChart" class="market-chart"></div>
+        <div class="chart-note">
+          *Values are standardized (z-scores) for clustering purposes.
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- SECOND ROW -->
+  <div class="row">
+
+    <!-- PERFORMANCE -->
+    <div class="col-lg-12">
+      <div class="market-card">
+        <h5>Stock Comparison</h5>
+
+        <div class="row">
+          <div class="col-md-4">
+            <div id="returnsChart" class="market-chart"></div>
+          </div>
+          <div class="col-md-4">
+            <div id="volatilityChart" class="market-chart"></div>
+          </div>
+          <div class="col-md-4">
+            <div id="drawdownChart" class="market-chart"></div>
+          </div>
+        </div>
+      </div>
+      <div class="market-card">
+        <h5>Risk-Adjusted Performance</h5>
+        <div id="sharpeChart" class="market-chart"></div>
+      </div>
+    </div>
+
+
+    <div class="col-lg-12">
+
+      <!-- ROLLING TIME SERIES -->
+      <div class="market-card">
+        <h5>Cluster Performance Over Time*</h5>
+        <div id="rollingChart" class="market-chart"></div>
+
+        <div class="chart-note">
+          <div>*COVID liquidity regime (2020–2021): post-pandemic stimulus, low rates, and strong tech-driven recovery.</div>
+          <div>Geopolitical shock regime (2022): Ukraine war, energy price spikes, and risk aversion.</div>
+          <div>Inflation tightening regime (2023): aggressive rate hikes, higher volatility, and cheaper stock relative to earnings.</div>
+        </div>
+      </div>
+
+      <!-- RADAR CHART -->
+      <div class="market-card">
+        <h5>Cluster Profiles (Risk–Return Characteristics)</h5>
+        <div id="radarChart" class="market-chart"></div>
+
+        <div class="chart-note">
+          *Values are normalized (0–1). Higher values indicate stronger performance. Axes represent "higher is better".
+          Values closer to the center indicate a weaker score in that metric.
+          Volatility is inverted so that higher = more stable / less risk.
+        </div>
+      </div>
+
+    </div>
+
+
+    <!-- INSIGHTS -->
+    <div class="col-lg-6">
+      <div class="market-card">
+        <h5>Insights</h5>
+        <p id="insights" class="market-insights">
+          Select parameters and run analysis.
+        </p>
+      </div>
+    </div>
+    <!-- NEW SECOND COLUMN -->
+    <div class="col-lg-6">
+      <div class="market-card">
+        <h5>Market Insight Summary</h5>
+        <div class="market-card">
+
+          <div class="market-insights">
+
+            <p>
+              This analysis examines how different market sectors—Technology, Defence & Aerospace, and Energy—have behaved since 2020, a period defined by significant macroeconomic disruption and recovery.
+            </p>
+
+            <p>
+              The COVID-19 shock in 2020 created a sharp market contraction followed by an unusually strong recovery phase driven by fiscal stimulus and changing consumption patterns. During this period, technology stocks exhibited strong growth characteristics, benefiting from increased digital adoption, but also showed sensitivity to later macroeconomic tightening.
+            </p>
+
+            <p>
+              In contrast, defence and aerospace stocks demonstrated more stable behaviour, particularly during periods of geopolitical tension. Events such as the war in Ukraine contributed to increased government spending in this sector, supporting more consistent performance and relatively resilient risk profiles.
+            </p>
+
+            <p>
+              Energy stocks, on the other hand, displayed highly cyclical behaviour. Their performance was closely tied to supply shocks and inflationary pressures, particularly during 2022, where energy prices surged. This resulted in periods of strong returns but also elevated volatility. During the inflation tightening regime, tech cluster returns show reduced magnitude and higher oscillation, consistent with a risk-off environment affecting growth-sensitive equities.
+            </p>
+
+            <p>
+              Clustering analysis reveals that stock behaviour does not strictly follow sector boundaries. Instead, stocks are grouped based on similarities in return patterns, volatility, and drawdown characteristics. This highlights that under different market regimes, assets from different sectors can exhibit comparable risk-return profiles.
+            </p>
+
+            <p>
+              The time-series analysis further shows that market regimes play a critical role in shaping cluster behaviour. Periods of crisis, recovery, and tightening cycles lead to clear divergence between clusters, particularly in terms of stability, recovery speed, and downside risk.
+            </p>
+
+            <p>
+              Overall, this analysis demonstrates that while sector identity provides a useful starting point, understanding market behaviour requires examining how assets respond dynamically to macroeconomic conditions. Clustering offers a structured way to uncover these patterns and support more informed decision-making.
+            </p>
+
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+  </div>
+
+</div>
+
+
+
+</body>
+</html>
