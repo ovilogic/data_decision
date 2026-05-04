@@ -69,7 +69,12 @@
 
         <div class="market-control-group">
           <label class="market-label">End Date</label>
-          <input type="date" id="year" class="market-date" />
+          <input type="date" id="year" class="market-date"
+          min="2020-09-18" />
+        </div>
+
+        <div class="market-context">
+          Explore how key market sectors evolved since the 2020 COVID shock. Stocks are grouped by behavior using return, volatility, and drawdown—revealing distinct risk and performance patterns over time.
         </div>
 
         <button class="market-btn" onclick="runAnalysis()">

@@ -1,6 +1,8 @@
 from flask import Flask, jsonify, request
 from datetime import datetime, date
 import pandas as pd
+from flask_limiter import Limiter
+from flask_limiter.util import get_remote_address
 
 from price_features import (
     SECTORS,
@@ -15,6 +17,11 @@ from flask_cors import CORS
 app = Flask(__name__)
 CORS(app)
 
+limiter = Limiter(
+    get_remote_address,
+    app=app,
+    default_limits=["60 per minute"]
+)
 
 # -----------------------------
 # CONFIG (single source of truth)
@@ -40,6 +47,7 @@ def sanitize_end_date(end_date: str | None):
 
 
 @app.route("/api/clustered-stocks", methods=["POST"])
+@limiter.limit("10 per minute")
 def run_pipeline():
     input_data = request.get_json()
 
@@ -57,7 +65,8 @@ def run_pipeline():
     end_date = sanitize_end_date(end_date)
 
     data = download_data(
-        tickers,
+        sector_id=sector_id,
+        tickers=tickers,
         start=start_date,
         end=end_date if end_date is None else str(end_date)
     )
@@ -108,3 +117,5 @@ def run_pipeline():
 
 if __name__ == "__main__":
     app.run(debug=True)
+   
+

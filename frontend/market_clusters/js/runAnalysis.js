@@ -640,7 +640,6 @@ function formatNum(value) {
     const label = labels_semantic[clusterId];
 
     const companiesList = (clusterGroups[clusterId] || [])
-      .slice(0, 5)
       .map(c => `${c.company} (${c.ticker})`)
       .join(", ");
 
@@ -680,17 +679,14 @@ function formatNum(value) {
 
     insightsBlocks.push(
       `${text}
-
       📊 Metrics:
       • Return: ${formatPct(ret)}
       • Volatility: ${formatPct(vol)}
       • Max Drawdown: ${formatPct(dd)}
       • Sharpe: ${formatNum(sh)}
-
       📈 Advanced:
       • Return / Drawdown: ${formatNum(returnToDD)}
       • Efficiency Rank: #${efficiencyRank}
-
       📌 Companies: ${companiesList || "N/A"}`
     );
   });

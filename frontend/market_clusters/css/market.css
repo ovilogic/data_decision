@@ -89,6 +89,17 @@
     opacity: 1;
 }
 
+.market-context {
+  font-size: 0.9rem;
+  color: #6c757d; /* muted */
+  font-style: italic;
+  background: #f8f9fa;
+  padding: 10px 12px;
+  border-radius: 6px;
+  margin-bottom: 12px;
+  line-height: 1.4;
+}
+
 /* Run button */
 .market-btn {
     width: 100%;

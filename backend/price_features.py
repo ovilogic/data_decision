@@ -1,9 +1,9 @@
 import yfinance as yf
 import numpy as np
-import matplotlib.pyplot as plt
 import pandas as pd
-from sklearn.cluster import KMeans
-from sklearn.preprocessing import StandardScaler
+import time
+import threading
+
 
 SECTORS = {
     "1": {
@@ -44,7 +44,7 @@ SECTORS = {
             "LMT", "RTX", "NOC", "GD", "LHX",
             "TXT", "HII", "BA", "RHM.DE", "HO.PA",
             "AIR.PA", "SAAB-B.ST", "MTX.DE", "SAF.PA", "EN.PA",
-            "PLTR", "KTOS", "AVAV", "CACI"
+            "PLTR", "KTOS", "AVAV", "CACI", "BA.L"
         ],
         "companies": {
             "LMT": "Lockheed Martin Corporation",
@@ -65,7 +65,8 @@ SECTORS = {
             "PLTR": "Palantir Technologies",
             "KTOS": "Kratos Defense & Security Solutions",
             "AVAV": "AeroVironment Inc.",
-            "CACI": "CACI International Inc."
+            "CACI": "CACI International Inc.",
+            "BA.L": "BAE Systems plc"
         }
     },
 
@@ -75,7 +76,7 @@ SECTORS = {
             "XOM", "CVX", "SHEL", "BP", "TTE",
             "EQNR", "KMI", "WMB", "OKE", "ENB",
             "TRP", "MPLX", "SLB", "HAL", "BKR",
-            "NEE", "ENPH", "FSLR", "ORSTED.CO"
+            "NEE", "ENPH", "FSLR", "COP", "VLO"
         ],
         "companies": {
             "XOM": "Exxon Mobil Corporation",
@@ -96,18 +97,70 @@ SECTORS = {
             "NEE": "NextEra Energy Inc.",
             "ENPH": "Enphase Energy Inc.",
             "FSLR": "First Solar Inc.",
-            "ORSTED.CO": "Ørsted A/S"
+            "COP": "ConocoPhillips",
+            "VLO": "Valero Energy Corporation"
         }
     }
 }
 
+# Cache storage
+SECTOR_CACHE = {}
+SECTOR_META = {}
+SECTOR_LOCKS= {}
+
+CACHE_TTL = 86400  # 1 day
+
+
+def get_sector_data(sector_id, tickers, start="2020-09-16"):
+    now = time.time() # Current timestamp
+
+    # Initialise lock if not exists
+    if sector_id not in SECTOR_LOCKS:
+        SECTOR_LOCKS[sector_id] = threading.Lock()
+        print(f"Initialized lock for sector {sector_id}")
+
+    # Fast path: cache hit
+    if sector_id in SECTOR_CACHE:
+        last_fetch = SECTOR_META[sector_id]
+
+        if now - last_fetch < CACHE_TTL:
+            print(f"{sector_id}: CACHE HIT")
+            return SECTOR_CACHE[sector_id]
+
+    # Slow path: acquire lock
+    with SECTOR_LOCKS[sector_id]:
+        print (f"{sector_id}: Acquired lock for fetching data")
+        # Check again after acquiring lock (important!)
+        if sector_id in SECTOR_CACHE:
+            last_fetch = SECTOR_META[sector_id]
+
+            if now - last_fetch < CACHE_TTL:
+                print(f"{sector_id}: CACHE HIT (after lock)")
+                return SECTOR_CACHE[sector_id]
+
+        # Actually fetch
+        print(f"{sector_id}: FETCHING FROM YFINANCE")
+        data = yf.download(tickers=tickers, start=start, end=None, auto_adjust=False)
+        data = data["Adj Close"].dropna()
+
+        if isinstance(data, pd.Series):
+            data = data.to_frame()
+
+        # Store in cache
+        SECTOR_CACHE[sector_id] = data
+        SECTOR_META[sector_id] = now
+
+        return data
+
+
 # Clean data downloader function
-def download_data(tickers, start="2020-09-16", end=None):
-    data = yf.download(tickers=tickers, start=start, end=end, auto_adjust=False)
-    data = data["Adj Close"].dropna()
-    if isinstance(data, pd.Series):
-        data = data.to_frame()
-    return data
+def download_data(sector_id, tickers, start="2020-09-16", end=None):
+    full_data = get_sector_data(sector_id=sector_id, tickers=tickers, start=start)
+
+    if end:
+        return full_data.loc[:end] # Downloads all rows (dates) up to and including the specified end date.
+
+    return full_data
 
 # First feature: returns.
 def compute_returns(ticker_prices):
@@ -145,3 +198,4 @@ def build_features_df(price_df):
     })
     
     return features
+
