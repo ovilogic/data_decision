@@ -7,9 +7,7 @@ async function runAnalysis() {
     end_date: endDate
   };
 
-  // console.log("Sending payload:", payload);
-
-  const response = await fetch("http://127.0.0.1:5000/api/clustered-stocks", {
+  const response = await fetch("https://api.technovi.net/clusters", {
     method: "POST",
     headers: {
       "Content-Type": "application/json"
@@ -40,9 +38,6 @@ async function runAnalysis() {
     alert(result.error);
     return;
   }
-
-  // TEMP: just show structure for now
-  console.log(result);
 
   const raw = result.clusters;
   const tickers = Object.keys(raw);
@@ -121,14 +116,6 @@ async function runAnalysis() {
   }
 
   const labels_semantic = labelClusters(avgReturns, avgVolatility, avgDrawdown, sharpe);
-
-  console.log("Cluster Labels:", labels_semantic);
-
-  // console.log("Volatility:", volatility);
-  // console.log("Average Returns:", average_returns);
-  // console.log("Max Drawdown:", max_drawdown);
-  // console.log("Clusters:", clusters);
-  // console.log("Tickers:", tickers);
 
   const clusterColors = {
   0: "#440154",
@@ -318,8 +305,6 @@ function renderSharpeChart(divId, sharpeObj, colors) {
 renderSharpeChart("sharpeChart", sharpe, clusterColors);
 
 const rollingData = result.rolling_avg_clustered;
-// console.log("Rolling Average Data:", rollingData);
-// console.log(rollingData["0"], Object.keys(rollingData["0"])); // should show dates and values for cluster 0
 
 function renderRollingChart(divId, rollingData, clusterColors) {
 
