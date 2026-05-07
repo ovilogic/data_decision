@@ -116,6 +116,14 @@
     background: #1e40af;
 }
 
+.market-footnote {
+  margin-top: 8px;
+  font-size: 0.78rem;
+  color: #6c757d;
+  font-style: italic;
+  line-height: 1.3;
+}
+
 /* =========================
     LABELS GUIDE
    ========================= */
